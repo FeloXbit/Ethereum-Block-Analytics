@@ -1,4 +1,6 @@
-# Ethereum-Block-Analytics
+# Ethereum Block Analytics Pipeline
+
+[![Ethereum Block Analytics Pipeline Repository](https://img.shields.io/badge/Repository-Github-blue)](https://github.com/FeloXbit/Ethereum-Block-Analytics)
 
 ##  **Project Overview**
 
@@ -6,18 +8,11 @@ This project implements a **data engineering pipeline** for ingesting, processin
 
 ---
 
-##  **Technologies Used**
+##  **Project Folder Structure**
 
-- **Cloud Infrastructure**: Google Cloud Platform (GCP)
-- **Orchestration**: Apache Airflow
-- **Data Warehouse**: BigQuery
-- **Data Transformation**: dbt (Data Build Tool)
-- **Visualization**: Power BI / Tableau
-- **Infrastructure as Code (IaC)**: Terraform
-- **Containerization**: Docker (optional)
+This repository follows the folder structure outlined below:
 
----
-
+```
 ethereum-block-analytics/
 │
 ├── dags/                      # Apache Airflow DAGs or Kestra Flows for orchestration
@@ -60,6 +55,19 @@ ethereum-block-analytics/
 ├── airflow.cfg                # Airflow configuration file (optional, if not using default settings)
 ├── README.md                  # Project documentation
 └── .gitignore                 # Git ignore file for excluding unnecessary files
+```
+
+---
+
+##  **Technologies Used**
+
+- **Cloud Infrastructure**: Google Cloud Platform (GCP)
+- **Orchestration**: Apache Airflow
+- **Data Warehouse**: BigQuery
+- **Data Transformation**: dbt (Data Build Tool)
+- **Visualization**: Power BI / Tableau
+- **Infrastructure as Code (IaC)**: Terraform
+- **Containerization**: Docker (optional)
 
 ---
 
@@ -123,7 +131,7 @@ Open **Power BI** (or your preferred dashboard tool) to view the visualizations:
 
 ---
 
-## 🛠️ **Project Workflow**
+##  **Project Workflow**
 
 1. **Data Ingestion**: Ethereum block data is ingested in **batch mode** from an external source to **Google Cloud Storage (GCS)**.
 2. **Orchestration**: The pipeline is fully orchestrated using **Apache Airflow**, which automates the data ingestion, transformation, and loading processes.
@@ -133,7 +141,7 @@ Open **Power BI** (or your preferred dashboard tool) to view the visualizations:
 
 ---
 
-## 💡 **Key Features**
+##  **Key Features**
 
 - **Cloud-Based**: Fully hosted on **Google Cloud Platform (GCP)** for scalability and reliability.
 - **Automated Pipelines**: The ingestion, transformation, and loading processes are automated and orchestrated using **Airflow**.
@@ -188,14 +196,6 @@ dbt run
 ```
 
 6. **Open the dashboard** in Power BI or Tableau to visualize the results.
-
----
-
-##  **Future Enhancements**
-
-- **Real-Time Data**: Implement streaming data ingestion using **Kafka** or **Google Pub/Sub** to capture real-time Ethereum blockchain data.
-- **Advanced Analytics**: Add more complex transformations to analyze transaction fees, block propagation times, or miner rewards by time of day.
-- **Machine Learning**: Build models to predict future gas limits or miner performance based on historical data.
 
 ---
 
