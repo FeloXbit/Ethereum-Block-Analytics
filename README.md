@@ -18,6 +18,51 @@ This project implements a **data engineering pipeline** for ingesting, processin
 
 ---
 
+ethereum-block-analytics/
+│
+├── dags/                      # Apache Airflow DAGs or Kestra Flows for orchestration
+│   ├── ethereum_block_ingestion.py  # Ingest Ethereum block data
+│   ├── data_transformation.py      # Transform raw data using dbt
+│   └── load_to_bigquery.py        # Load processed data into BigQuery
+│
+├── dbt/                       # dbt models and configurations
+│   ├── models/                 # SQL transformations (fact & dimension tables)
+│   │   ├── fact_blocks.sql     # Main block data aggregation model
+│   │   ├── dim_miners.sql      # Miner dimension model
+│   │   ├── dim_time.sql        # Time dimension model
+│   │   └── ...
+│   ├── seeds/                  # Static data files (e.g., country codes, etc.)
+│   ├── snapshots/              # dbt snapshots for slowly changing dimensions (if applicable)
+│   └── dbt_project.yml         # dbt configuration file
+│
+├── notebooks/                 # Jupyter Notebooks for exploration or debugging
+│   ├── data_exploration.ipynb  # Exploratory data analysis (EDA) on Ethereum blocks
+│   └── ...
+│
+├── data/                      # Raw and processed data (optional, could be excluded in favor of GCS)
+│   ├── raw_data/               # Store raw Ethereum block data before processing
+│   └── processed_data/         # Store processed data ready for analysis
+│
+├── dashboards/                # Power BI / Tableau dashboard reports
+│   ├── ethereum_dashboard.pbix  # Power BI report file (or exported images, templates)
+│   └── ...
+│
+├── docker/                    # Docker-related files (optional)
+│   ├── Dockerfile             # Dockerfile for containerizing the pipeline
+│   └── docker-compose.yml     # Docker Compose file (if needed)
+│
+├── terraform/                 # Terraform scripts for provisioning GCP resources
+│   ├── main.tf                # Terraform configuration for GCP infrastructure
+│   ├── variables.tf           # Variables for GCP resources
+│   └── outputs.tf             # Output configuration for GCP resources
+│
+├── requirements.txt           # Python dependencies for the project
+├── airflow.cfg                # Airflow configuration file (optional, if not using default settings)
+├── README.md                  # Project documentation
+└── .gitignore                 # Git ignore file for excluding unnecessary files
+
+---
+
 ##  **Project Setup**
 
 ### 1. Clone the Repository
