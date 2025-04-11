@@ -33,14 +33,14 @@ resource "google_storage_bucket" "ethereum_block" {
 resource "google_storage_bucket_object" "dataflow_temp_folder" {
   name    = "temp/"
   content = "temp folder for dataflow"
-  bucket  = google_storage_bucket.carpark_bucket.name
+  bucket  = google_storage_bucket.ethereum_block.name
 }
 
 # Create a directory for Dataflow staging files
 resource "google_storage_bucket_object" "dataflow_staging_folder" {
   name    = "staging/"
   content = "staging folder for dataflow"
-  bucket  = google_storage_bucket.carpark_bucket.name
+  bucket  = google_storage_bucket.ethereum_block.name
 }
 
 # BigQuery Dataset - Raw Data
