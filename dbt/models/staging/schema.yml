@@ -7,7 +7,8 @@ sources:
       - name: ethereum_transactions  
 
 models:
-  - name: stg_staging_ethereum__transactions
+  - name: stg_staging__ethereum_transactions
+
     description: "Staging model that extracts and prepares Ethereum transaction and block-level data from the raw source."
     columns:
       - name: block_id
