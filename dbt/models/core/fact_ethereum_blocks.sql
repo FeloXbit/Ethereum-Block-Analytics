@@ -9,6 +9,7 @@ with base as (
 
     select *
     from {{ ref('stg_staging__ethereum_transactions') }}
+    where created_ts is not null --line of code added
 ),
 
 -- Join with dim_miners to get descriptive miner details
