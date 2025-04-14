@@ -1,5 +1,3 @@
----
-
 
 # Built with dbt on BigQuery
 
@@ -160,8 +158,6 @@ dbt build
 **Resolved issues during the process:**
 - _Source not found_: fixed by properly defining it in `schema.yml`
 - _No data to display_: ensured the staging model had actual rows
-- _Quota exceeded_: cleared previous runs and waited for quota reset
-
 ---
 
 ### 8. Generate & View Documentation
@@ -176,8 +172,6 @@ Locally:
 dbt docs generate
 dbt docs serve
 ```
-
-
 
 ### Resources:
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
