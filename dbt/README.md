@@ -1,13 +1,13 @@
 ---
 
-```markdown
+
 # Built with dbt on BigQuery
 
 This project transforms raw Ethereum transaction data into an analytical dataset of block-level insights using [dbt](https://www.getdbt.com/) and Google BigQuery. It includes staging, fact/dimension modeling, and documentation generation.
 
 ---
 
-## 🛠️ How I Built It
+## How I Built It
 
 ### 1. Set up the Environment
 - **Platform**: dbt Cloud  
@@ -177,14 +177,6 @@ dbt docs generate
 dbt docs serve
 ```
 
----
-
-## 🚀 Next Steps
-- Add `dim_contracts` or smart contract-level metadata  
-- Create metrics for gas efficiency and block reward trends  
-- Add tests for surrogate key uniqueness and nulls  
-
----
 
 
 ### Resources:
