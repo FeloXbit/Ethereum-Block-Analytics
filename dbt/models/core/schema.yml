@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: fact_ethereum_blocks
+    description: "Fact table with details for each Ethereum block."
+    columns:
+      - name: block_key
+        description: "Surrogate key uniquely identifying a block."
+      - name: block_height
+        description: "Height of the Ethereum block in the blockchain."
+      - name: total_tx
+        description: "Total number of transactions in the block."
+
+  - name: dim_miners
+    description: "Dimension table containing miner metadata."
+    columns:
+      - name: miner_id
+        description: "Surrogate key for each unique miner."
+      - name: miner_hash
+        description: "Hash identifying the miner."
