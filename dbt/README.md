@@ -4,6 +4,10 @@
 This project transforms raw Ethereum transaction data into an analytical dataset of block-level insights using [dbt](https://www.getdbt.com/) and Google BigQuery. It includes staging, fact/dimension modeling, and documentation generation.
 
 ---
+![dbt-dag](https://github.com/user-attachments/assets/e9be82a2-a94d-4f89-9291-5d920656eb8b)
+
+
+---
 
 ## How I Built It
 
