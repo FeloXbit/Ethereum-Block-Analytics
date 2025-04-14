@@ -1,0 +1,44 @@
+version: 2
+
+sources:
+  - name: staging
+    schema: ethereum_data
+    tables:
+      - name: ethereum_transactions  
+
+models:
+  - name: stg_staging_ethereum__transactions
+    description: "Staging model that extracts and prepares Ethereum transaction and block-level data from the raw source."
+    columns:
+      - name: block_id
+        description: "Surrogate key for identifying a unique block, generated from block height and hash."
+      - name: block_height
+        description: "The height of the block in the blockchain."
+      - name: block_hash
+        description: "Hash value that uniquely identifies the block."
+      - name: created_ts
+        description: "Timestamp when the block was created."
+      - name: time_in_sec
+        description: "The Unix time representation of block creation in seconds."
+      - name: block_time_in_sec
+        description: "Time it took to mine the block, in seconds."
+      - name: miner_hash
+        description: "The unique identifier for the miner who mined the block."
+      - name: miner_name
+        description: "Human-readable name of the miner."
+      - name: miner_icon_url
+        description: "URL of the miner's icon or logo."
+      - name: block_reward
+        description: "Total reward given for mining the block, typically in ETH."
+      - name: block_size
+        description: "Size of the block in bytes."
+      - name: total_uncle
+        description: "Count of uncle blocks included in this block."
+      - name: total_tx
+        description: "Total number of transactions within this block."
+      - name: gas_used
+        description: "Total gas consumed by transactions in this block."
+      - name: gas_limit
+        description: "Maximum amount of gas allowed in the block."
+      - name: gas_avg_price
+        description: "Average price of gas per transaction in the block."
