@@ -20,9 +20,14 @@ Solve the challenge of extracting meaningful, queryable insights from Ethereum b
 
 ## **What the Project Does**
 
+![Data Architecture drawio](https://github.com/user-attachments/assets/b70919fc-113c-43d9-b858-1d9505e23ed8)
+
 Extracts block-level data from the Ethereum network.
+
 Transforms the raw data into a structured format.
+
 Loads the transformed data into BigQuery.
+
 Visualizes metrics and trends for further analysis.
 
 ##  **Project Folder Structure**
