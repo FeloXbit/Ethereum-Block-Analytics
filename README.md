@@ -8,6 +8,23 @@ This project implements a **data engineering pipeline** for ingesting, processin
 
 ---
 
+## **Problem Statement**
+
+The Ethereum blockchain produces vast amounts of block data every day. This data contains valuable insights about:
+Network performance (gas usage, block size, transaction throughput)
+Miner behavior and rewards
+Congestion patterns and trends over time
+
+However, raw blockchain data is difficult to consume and analyze due to its volume, structure, and complexity. This project aims to:
+Solve the challenge of extracting meaningful, queryable insights from Ethereum block data by building an automated, scalable, and cloud-native data pipeline.
+
+## **What the Project Does**
+
+Extracts block-level data from the Ethereum network.
+Transforms the raw data into a structured format.
+Loads the transformed data into BigQuery.
+Visualizes metrics and trends for further analysis.
+
 ##  **Project Folder Structure**
 
 This repository follows the folder structure outlined below:
@@ -126,7 +143,7 @@ dbt run
 
 ### 6. View the Dashboard
 
-Open **Power BI** (or your preferred dashboard tool) to view the visualizations:
+Open **Looker Studio** (or your preferred dashboard tool) to view the visualizations:
 
 - Miner Activity: Top miners by total rewards
 - Gas Limit Trends: Gas limits over time
