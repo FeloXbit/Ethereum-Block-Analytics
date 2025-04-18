@@ -1,13 +1,13 @@
-### 1️⃣ Infrastructure Setup – Terraform  
+### Infrastructure Setup – Terraform  
 
-📌 **Goal**: Automate the provisioning of all Google Cloud resources needed by the pipeline, including:
+ **Goal**: Automate the provisioning of all Google Cloud resources needed by the pipeline, including:
 
 - A **Google Cloud Storage (GCS)** bucket to stage raw data
 - A **BigQuery** dataset to store and analyze Ethereum blockchain data
 
 ---
 
-#### 🧱 What It Provisions:
+#### What It Provisions:
 
 | Resource             | Name                                |
 |----------------------|-------------------------------------|
@@ -18,7 +18,7 @@
 
 ---
 
-#### 🗂️ Files and Their Roles
+#### Files and Their Roles
 
 | File | Purpose |
 |------|--------|
@@ -91,39 +91,164 @@ variable "dataproc_image_version" {
  ```
 
    - You set actual values like this in `terraform.tfvars`:
-     ```hcl
-     bucket_name = "ethereum-block-analytics-data"
-     ```
+
+  ```hcl    
+credentials            = "./top-design-455621-h9-66e5948e961a.json"
+project_id            = "top-design-455621-h9"
+bucket_name           = "ethereum-block-analytics-data"
+bucket_location       = "US"
+dataset_id            = "ethereum_data"
+table_id              = "ethereum_transactions"
+gcs_bucket_name       = "Eth-analytics"
+gcs_storage_class     = "STANDARD"
+dataproc_cluster_name = "Eth-analytics-cluster"
+dataproc_machine_type = "n1-standard-2"
+dataproc_image_version = "2.1-debian10"
+```
 
 2. **Resource Provisioning (`main.tf`)**
 
-   ```hcl
-   resource "google_storage_bucket" "ethereum_data_bucket" {
-     name          = var.bucket_name
-     location      = var.region
-     force_destroy = true
-   }
+ ```hcl
+  
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "6.19.0"
+    }
+  }
+}
 
-   resource "google_bigquery_dataset" "ethereum_dataset" {
-     dataset_id                  = var.dataset_name
-     location                    = var.region
-     delete_contents_on_destroy = true
-   }
-   ```
+provider "google" {
+  credentials = file(var.credentials)
+  project     = var.project
+  region      = var.region
+}
+
+# GCS Data Lake Storage Bucket
+resource "google_storage_bucket" "ethereum_block" {
+  name          = var.gcs_bucket_name
+  location      = var.location
+  force_destroy = true
+
+  lifecycle_rule {
+    condition {
+      age = 30  
+    }
+    action {
+      type = "AbortIncompleteMultipartUpload"
+    }
+  }
+}
+
+# Create a directory for temporary files of Dataflow
+resource "google_storage_bucket_object" "dataflow_temp_folder" {
+  name    = "temp/"
+  content = "temp folder for dataflow"
+  bucket  = google_storage_bucket.ethereum_block.name
+}
+
+# Create a directory for Dataflow staging files
+resource "google_storage_bucket_object" "dataflow_staging_folder" {
+  name    = "staging/"
+  content = "staging folder for dataflow"
+  bucket  = google_storage_bucket.ethereum_block.name
+}
+
+# BigQuery Dataset - Raw Data
+resource "google_bigquery_dataset" "raw_dataset" {
+  dataset_id = var.raw_dataset_name
+  location   = var.location
+}
+
+# BigQuery Dataset - Processed Data
+resource "google_bigquery_dataset" "processed_dataset" {
+  dataset_id = var.processed_dataset_name
+  location   = var.location
+}
+
+# BigQuery raw data table
+resource "google_bigquery_table" "carpark_availability_table" {
+  dataset_id = google_bigquery_dataset.raw_dataset.dataset_id
+  table_id   = "carpark_availability"
+  deletion_protection = false
+
+  time_partitioning {
+    type  = "DAY"
+    field = "timestamp"
+  }
+
+  schema = <<EOF
+[
+  {
+    "name": "timestamp",
+    "type": "TIMESTAMP",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "CarParkID",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "Area",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "Development",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "Location",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "Latitude",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "Longitude",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "AvailableLots",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "LotType",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "Agency",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "ingestion_time",
+    "type": "TIMESTAMP",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "processing_time",
+    "type": "TIMESTAMP",
+    "mode": "REQUIRED"
+  }
+]
+EOF
+}
+
+
+ ```
 
    - Provisions both the staging bucket and the data warehouse dataset.
 
-4. **Deployment Outputs (`outputs.tf`)**
-
-   ```hcl
-   output "bucket_name" {
-     value = google_storage_bucket.ethereum_data_bucket.name
-   }
-   ```
-
-   - Outputs the names of your deployed GCP resources in the console.
-
----
 
 #### Deployment Steps
 
