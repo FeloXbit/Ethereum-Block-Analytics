@@ -64,11 +64,11 @@ ethereum-block-analytics/
 │   ├── raw_data/               # Store raw Ethereum block data before processing
 │   └── processed_data/         # Store processed data ready for analysis
 │
-├── dashboards/                # Power BI / Tableau dashboard reports
-│   ├── ethereum_dashboard.pbix  # Power BI report file (or exported images, templates)
+├── dashboards/                # dashboard reports
+│   ├── ethereum_dashboard.pdf  # Looker studio
 │   └── ...
 │
-├── docker/                    # Docker-related files (optional)
+├── docker/                    # Docker-related files 
 │   ├── Dockerfile             # Dockerfile for containerizing the pipeline
 │   └── docker-compose.yml     # Docker Compose file (if needed)
 │
@@ -189,7 +189,7 @@ variable "dataproc_image_version" {
 
  ```
 
-   - You set actual values like this in `terraform.tfvars`:
+   - I set actual values like this in `terraform.tfvars`:
 
   ```hcl    
 credentials            = "./top-design-455621-h9-66e5948e961a.json"
@@ -363,10 +363,6 @@ After a successful run, Terraform will provision all required GCP infrastructure
 
 ---
 
-Perfect. Here's the next section for your README:
-
----
-
 ### Data Ingestion – Python Scripts  
 
 
@@ -440,9 +436,6 @@ def upload_to_gcs(bucket_name, source_file, destination_blob):
 #### Outcome
 
 Once complete, raw CSV files representing Ethereum blocks and transactions will be available in GCS and ready for loading into BigQuery.
-
----
-Awesome, here comes the **Apache Airflow orchestration section** for your README:
 
 ---
 
@@ -567,7 +560,7 @@ def load_to_bigquery(bucket_name, source_file, dataset_id, table_id):
 
 ---
 
-#### 🗄️ Dataset & Table Info
+####  Dataset & Table Info
 
 | Dataset | `ethereum_data` |
 |---------|-----------------|
