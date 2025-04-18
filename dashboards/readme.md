@@ -1,5 +1,3 @@
----
-
 ## Ethereum Block Analytics Dashboard
 
 ### Ethereum Block Overview
