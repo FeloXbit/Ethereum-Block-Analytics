@@ -1,6 +1,8 @@
 ## Ethereum Block Analytics Dashboard
 
 ### Ethereum Block Overview
+![Overview](https://github.com/user-attachments/assets/556d52d1-d3c2-4ac4-91bf-1b1f1982887e)
+
 
 - **Block Time (sec) Over Time**  
   The average block time remains within the 13–15 second range across the observed period, showing consistent block production.
@@ -23,6 +25,9 @@
 ---
 
 ### Gas Market & Transaction Metrics
+
+![Gas Market](https://github.com/user-attachments/assets/ddae138f-4e6a-4527-bd52-4d83a38b6ffa)
+
 
 - **Average Gas Price Over Time**  
   Distinct spikes in gas price are observed between September 2020 and May 2021, corresponding to periods of increased network usage.
