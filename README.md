@@ -61,9 +61,10 @@ ethereum-block-analytics/
 │   └── ...
 │
 ├── data/                      # Raw and processed data (optional, could be excluded in favor of GCS)
-│   ├── raw_data/               # Store raw Ethereum block data before processing
-│   └── processed_data/         # Store processed data ready for analysis
-│
+│   ├── download_data.py         # Downloads raw Ethereum block data from Kaggle
+│   ├── upload_to_gcs.py         # Uploads the downloaded data to GCS bucket
+│   ├── config.py          
+│   └── requirements.txt
 ├── dashboards/                # dashboard reports
 │   ├── ethereum_dashboard.pdf  # Looker studio
 │   └── ...
