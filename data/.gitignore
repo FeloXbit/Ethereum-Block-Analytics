@@ -1,0 +1,4 @@
+*.pyc
+__pycache__/
+data/
+*.json  # if you are using credentials or other sensitive files
